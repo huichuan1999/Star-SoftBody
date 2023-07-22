@@ -5,6 +5,7 @@ class Star {
     this.radius2 = radius2;
     this.centerX = centerX;
     this.centerY = centerY;
+    this.particleStrings = []; // array to store ParticleString objects
 
     this.centerPoint = new VerletParticle2D(centerX, centerY);
     physics.addParticle(this.centerPoint);
@@ -27,11 +28,19 @@ class Star {
         let innerPoint = new VerletParticle2D(sx, sy);
         this.points.push(innerPoint);
         physics.addParticle(this.points[this.points.length - 1]);
-  
+
+        // Create a ParticleString for each inner point
+        const stepDirection = new toxi.geom.Vec2D(0, 1).normalizeTo(40);
+        let numParticles = random(4,10);
+        let strength = 1;
+        let damping = 0.1;
+        let particleString = new ParticleString(tailPhysics, innerPoint, stepDirection, numParticles, strength, damping);
+        this.particleStrings.push(particleString);
+
         // Add a spring connecting inner point and center point
         let innerSpring = new VerletSpring2D(innerPoint, this.centerPoint, this.centerPoint.distanceTo(innerPoint), 0.01);
         physics.addSpring(innerSpring);
-  
+
         // If there's a last inner point, create a spring between it and the current inner point
         if (lastInnerPoint != null) {
           innerDistance = innerPoint.distanceTo(lastInnerPoint); // get the distance between two adjacent inner points
@@ -43,40 +52,52 @@ class Star {
         lastInnerPoint = innerPoint; // update the last inner point
       }
     }
-  
+
     // Create a spring between the first and the last inner point
     let innerInnerSpring = new VerletSpring2D(lastInnerPoint, firstInnerPoint, innerDistance, 0.01);
     physics.addSpring(innerInnerSpring);
-  
+
     for (let i = 0; i < this.points.length - 1; i++) {
       let spring = new VerletSpring2D(this.points[i], this.points[i + 1], this.points[i].distanceTo(this.points[i + 1]), 0.01);
       physics.addSpring(spring);
     }
-  
+
     // Add an extra spring to connect the last point with the first one
     let extraSpring = new VerletSpring2D(this.points[this.points.length - 1], this.points[0], this.points[this.points.length - 1].distanceTo(this.points[0]), 0.01);
     physics.addSpring(extraSpring);
   }
-  
 
-
+  updateParticleStrings() {
+    // Iterate through each particle string
+    for (let i = 0; i < this.particleStrings.length; i++) {
+      // Update the position of the first particle in the string to match the corresponding inner point
+      this.particleStrings[i].particles[0].set(this.points[i * 2 + 1]);
+    }
+  }
 
   draw() {
     
     // Draw springs
-    stroke(255,50); // Set the color to gray
+    stroke(255, 50); // Set the color to gray
     for (let i = 0; i < physics.springs.length; i++) {
       let spring = physics.springs[i];
       line(spring.a.x, spring.a.y, spring.b.x, spring.b.y);
     }
-    
-    fill(255,100);
+
+    fill(255, 100);
     stroke(255);
     beginShape();
     for (let p of this.points) {
-      circle(p.x,p.y,7);
+      circle(p.x, p.y, 7);
       vertex(p.x, p.y);
     }
     endShape(CLOSE);
+
+    this.updateParticleStrings();
+    for (let particleString of this.particleStrings) {
+      particleString.display();
+    }
   }
+
+  
 }
