@@ -30,7 +30,7 @@ class Star {
         physics.addParticle(this.points[this.points.length - 1]);
 
         // Create a ParticleString for each inner point
-        const stepDirection = new toxi.geom.Vec2D(0, 1).normalizeTo(40);
+        const stepDirection = new toxi.geom.Vec2D(0, 1).normalizeTo(20);
         let numParticles = random(4,10);
         let strength = 1;
         let damping = 0.1;
