@@ -6,7 +6,7 @@ let numStars = 0;
 let particleGrabRadius = 10;
 
 function setup() {
-  createCanvas(600,600);
+  createCanvas(windowWidth,windowHeight);
   physics = new VerletPhysics2D();
   physics.setWorldBounds(new Rect(0, 0, width, height));
 
