@@ -79,6 +79,7 @@ class Star {
     
     // Draw springs
     stroke(255, 50); // Set the color to gray
+    strokeWeight(1);
     for (let i = 0; i < physics.springs.length; i++) {
       let spring = physics.springs[i];
       line(spring.a.x, spring.a.y, spring.b.x, spring.b.y);
@@ -99,5 +100,5 @@ class Star {
     }
   }
 
-  
+
 }

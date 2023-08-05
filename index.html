@@ -10,6 +10,17 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
 
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+    <script defer language="javascript" type="text/javascript" src="handtracking/detection.js"></script>
+    <script defer language="javascript" type="text/javascript" src="handtracking/handLandmarkTesting.js"></script>
+    <script defer language="javascript" type="text/javascript" src="handtracking/HandParticle.js"></script>
+    <script defer language="javascript" type="text/javascript" src="handtracking/particle.js"></script>
+    <script defer language="javascript" type="text/javascript" src="handtracking/spring.js"></script>
+
   </head>
   <body>
     <main>
@@ -17,5 +28,9 @@
     <script src="sketch.js"></script>
     <script src="Star.js"></script>
     <script src="ParticleStrings.js"></script>
+
+    <video id="video"></video>
+
+    <div class = "overlay"></div>
   </body>
 </html>

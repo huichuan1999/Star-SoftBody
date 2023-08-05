@@ -1,7 +1,44 @@
 html, body {
-  margin: 0;
+  /* margin: 0;
   padding: 0;
+  width: 100%;
+  /* height: 100%; */
+  /* overflow: hidden; */ 
+  background-color: #000;
 }
-canvas {
-  display: block;
+
+#canvas {
+  position: absolute;
+  transform: rotateY(180deg);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+#video {
+  position: absolute;
+  transform: rotateY(180deg);
+  filter: grayscale(100%) invert(20%);
+  /* filter: blur(3px); */
+  /* filter:invert(.8); */
+  /* filter:saturate(.7); */
+  /* filter:sepia(100%); */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.overlay{
+  background-color: rgba(0,0,0,0.5);
+  /* background-color: #000; */
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1
 }
