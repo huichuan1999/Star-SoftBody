@@ -121,7 +121,7 @@ function draw() {
 
       // 更新吸引行为的中心
       attraction.setAttractor(new Vec2D(midpoint.x, midpoint.y));
-
+      attraction.setStrength(0.5); 
       //捏合交互
       // for (let star of stars) {
       //   //for (let point of star.points) {
@@ -140,6 +140,7 @@ function draw() {
     }
     else {
       draggedParticle = null;
+      attraction.setStrength(0); //将吸引行为设置为0
     }
   }
 
