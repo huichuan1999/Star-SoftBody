@@ -30,8 +30,8 @@ class Star {
         physics.addParticle(this.points[this.points.length - 1]);
 
         // Create a ParticleString for each inner point
-        const stepDirection = new toxi.geom.Vec2D(0, 1).normalizeTo(20);
-        let numParticles = random(4,10);
+        const stepDirection = new toxi.geom.Vec2D(0, 1).normalizeTo(40);
+        let numParticles = random(4,15);
         let strength = 1;
         let damping = 0.1;
         let particleString = new ParticleString(tailPhysics, innerPoint, stepDirection, numParticles, strength, damping);
@@ -89,7 +89,7 @@ class Star {
     stroke(255);
     beginShape();
     for (let p of this.points) {
-      circle(p.x, p.y, 7);
+      circle(p.x, p.y, 15);
       vertex(p.x, p.y);
     }
     endShape(CLOSE);

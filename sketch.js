@@ -2,7 +2,7 @@ let physics;
 let tailPhysics;
 let stars = [];
 let angStars = [];
-let numStars = 7;
+let numStars = 4;
 let particleGrabRadius = 30;
 
 let handParticles = [];
@@ -24,7 +24,7 @@ function setup() {
   tailPhysics = new VerletPhysics2D();
   tailPhysics.setWorldBounds(new Rect(0, 0, width, height));
   let gb = new GravityBehavior(new Vec2D(0, 0.1));// add gravity to tails
-  tailPhysics.addBehavior(gb);
+  //tailPhysics.addBehavior(gb);
   //tailPhysics.setDrag(0.2);
 
   attraction = new AttractionBehavior(new Vec2D(0,0), 500, 0.5, 0.2);//整体的环境吸引力
@@ -36,7 +36,7 @@ function setup() {
     let centerX = random(width / 6, width - width / 6);
     let centerY = random(height / 6, height - height / 6);
     angStars.push(random(3, 7));
-    let star = new Star(centerX, centerY, angStars[i], random(10, 20), random(30, 50));
+    let star = new Star(centerX, centerY, angStars[i], random(15, 25), random(40, 60));
     stars.push(star);
   }
 
@@ -124,7 +124,7 @@ function draw() {
       attraction.setStrength(0.5); 
       //捏合交互
       // for (let star of stars) {
-      //   //for (let point of star.points) {
+      //   //for (let point of star.points) { 
       //     let d = dist(midpoint.x, midpoint.y, star.centerPoint.x, star.centerPoint.y);
       //     if (d < particleGrabRadius) {
       //       // star.centerPoint.lock();
