@@ -2,7 +2,7 @@ let physics;
 let tailPhysics;
 let stars = [];
 let angStars = [];
-let numStars = 4;
+let numStars = 10;
 let particleGrabRadius = 30;
 
 let handParticles = [];
@@ -19,13 +19,13 @@ function setup() {
   canvas.id("canvas");
   physics = new VerletPhysics2D();
   physics.setWorldBounds(new Rect(0, 0, width, height));
-  physics.setDrag(0.01);
+  physics.setDrag(0.001);
 
   tailPhysics = new VerletPhysics2D();
   tailPhysics.setWorldBounds(new Rect(0, 0, width, height));
   let gb = new GravityBehavior(new Vec2D(0, 0.1));// add gravity to tails
-  //tailPhysics.addBehavior(gb);
-  //tailPhysics.setDrag(0.2);
+  tailPhysics.addBehavior(gb);
+  tailPhysics.setDrag(0.1);
 
   attraction = new AttractionBehavior(new Vec2D(0,0), 500, 0.5, 0.2);//整体的环境吸引力
   physics.addBehavior(attraction);
@@ -36,7 +36,7 @@ function setup() {
     let centerX = random(width / 6, width - width / 6);
     let centerY = random(height / 6, height - height / 6);
     angStars.push(random(3, 7));
-    let star = new Star(centerX, centerY, angStars[i], random(15, 25), random(40, 60));
+    let star = new Star(centerX, centerY, angStars[i], random(10, 20), random(30, 50));
     stars.push(star);
   }
 
@@ -121,7 +121,7 @@ function draw() {
 
       // 更新吸引行为的中心
       attraction.setAttractor(new Vec2D(midpoint.x, midpoint.y));
-      attraction.setStrength(0.5); 
+      attraction.setStrength(0.1); 
       //捏合交互
       // for (let star of stars) {
       //   //for (let point of star.points) { 
