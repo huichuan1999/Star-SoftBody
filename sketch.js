@@ -2,7 +2,7 @@ let physics;
 let tailPhysics;
 let stars = [];
 let angStars = [];
-let numStars = 10;
+let numStars = 3;
 let particleGrabRadius = 30;
 
 let handParticles = [];
@@ -27,7 +27,7 @@ function setup() {
   tailPhysics.addBehavior(gb);
   tailPhysics.setDrag(0.1);
 
-  attraction = new AttractionBehavior(new Vec2D(0,0), 500, 0.5, 0.2);//整体的环境吸引力
+  attraction = new AttractionBehavior(new Vec2D(0, 0), 500, 0.5, 0.2);//整体的环境吸引力
   physics.addBehavior(attraction);
 
   colorMode(HSB, 255);
@@ -121,7 +121,7 @@ function draw() {
 
       // 更新吸引行为的中心
       attraction.setAttractor(new Vec2D(midpoint.x, midpoint.y));
-      attraction.setStrength(0.1); 
+      attraction.setStrength(0.1);
       //捏合交互
       // for (let star of stars) {
       //   //for (let point of star.points) { 
